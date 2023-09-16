@@ -14,8 +14,7 @@ class PCA:
         
         # calculate covariance matrix
         covariance_matrix = self.get_covariance_matrix()
-        
-        
+              
         # retrieve selected eigenvectors
         eigenvectors = self.get_eigenvectors(covariance_matrix)
         
@@ -26,11 +25,14 @@ class PCA:
     def standardize_data(self, X):
         numerator = X - np.mean(X, axis=0)
         denominator = np.std(X, axis=0)
+        print(numerator/denominator)
         return numerator / denominator
     
     def get_covariance_matrix(self, ddof=0):
         # calculate covariance matrix with standardized matrix A
         C = np.dot(self.A.T, self.A) / (self.n_samples-ddof)
+        print(C)
+        print(C.shape)
         return C
 
     def get_eigenvectors(self, C):
@@ -40,10 +42,14 @@ class PCA:
         # sort eigenvalues descending and select columns based on n_components
         n_cols = np.argsort(eigenvalues)[::-1][:self.n_components]
         selected_vectors = eigenvectors[:, n_cols]
+        print(selected_vectors)
         return selected_vectors
 
     def project_matrix(self, eigenvectors):
         P = np.dot(self.A, eigenvectors)
+        print(self.A)
+        print(P)
+        print(P.shape)
         return P
 
 # Testing
@@ -72,3 +78,4 @@ if __name__ == "__main__":
 
     sns.despine()
     plt.show()
+  
