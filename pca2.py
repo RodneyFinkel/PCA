@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
+from sklearn.datasets import load_wine
 
 wine = load_wine()
 
