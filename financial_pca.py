@@ -36,3 +36,17 @@ ax.set_xlabel('Principal Component 1')
 ax.set_ylabel('Principal Component 2')
 ax.set_title('Principal Components')
 plt.show()
+
+# Calculate alpha factors
+alpha_factors = pd.DataFrame()
+for i in range(3):
+    alpha_factors[f'alpha_{i+1}'] = returns.dot(pca.components_[i])
+
+# Add alpha factors to returns data
+alpha_returns = pd.concat([alpha_factors, returns], axis=1)
+
+# Plot scatter matrix of alpha factors
+sns.set(style='ticks', palette='viridis')
+g = sns.pairplot(alpha_factors)
+g.fig.set_size_inches(10,10)
+plt.show()
