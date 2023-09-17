@@ -27,7 +27,12 @@ pca.fit(returns)
 fig, ax = plt.subplots(figsize=(12, 6), dpi=100)
 for i, (x, y) in enumerate(zip(pca.components_[0], pca.components_[1])):
     ax.scatter(x, y, marker='o', s=100)
-    ax.annotate(returns.columns[i], xy=(x, y), xttext=(x+0.04, y+0.06), 
-                arrowprops=dict(facecolor='black', shrink=0.05, width=2, headwidth=6, headlength=8, connectionstyle='arc3, rad=0.1'))
-    
+    ax.annotate(returns.columns[i], xy=(x, y), xytext=(x+0.04, y+0.06),
+                arrowprops=dict(facecolor='black', shrink=0.05, width=2, headwidth=6, headlength=8, connectionstyle='arc3,rad=0.1'))
 
+ax.set_xlim([-0.5, 0.5])
+ax.set_ylim([-0.5, 0.5])
+ax.set_xlabel('Principal Component 1')
+ax.set_ylabel('Principal Component 2')
+ax.set_title('Principal Components')
+plt.show()
