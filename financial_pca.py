@@ -8,9 +8,9 @@ tech_tickers = ['AAPL', 'MSFT', 'AMZN', 'GOOG']
 bank_tickers = ['JPM', 'BAC', 'GS', 'MS']
 finance_tickers = ['MA', 'AXP']
 
-tech_data = yf.download(tech_tickers, start='2015-01-01', end='2023-08-01')['Adj Close']
-finance_data = yf.download(bank_tickers, start='2015-01-01', end='2-23-08-01')['Adj Close']
-bank_data = yf.download(bank_tickers, start='2015-01-01', end='2023-08-01')['Adj Close']
+tech_data = yf.download(tech_tickers, start='2015-01-01', end='2023-03-01')['Adj Close']
+finance_data = yf.download(finance_tickers, start='2015-01-01', end='2023-03-01')['Adj Close']
+bank_data = yf.download(bank_tickers, start='2015-01-01', end='2023-03-01')['Adj Close']
 
 # Combine data into a single dataframe
 data = pd.concat([tech_data, finance_data, bank_data], axis=1)
