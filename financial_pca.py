@@ -13,7 +13,7 @@ finance_data = yf.download(bank_tickers, start='2015-01-01', end='2-23-08-01')['
 bank_data = yf.download(bank_tickers, start='2015-01-01', end='2023-08-01')['Adj Close']
 
 # Combine data into a single dataframe
-data = pdconcat([tech_data, finance_data, bank_data], axis=1)
+data = pd.concat([tech_data, finance_data, bank_data], axis=1)
 data.columns = ['AAPL', 'MSFT', 'AMZN', 'GOOG', 'JPM', 'BAC', 'GS', 'MS', 'MA', 'AXP']
 data
 
