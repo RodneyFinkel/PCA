@@ -1,5 +1,6 @@
 import yfinance as yf
 import pandas as pd
+import seaborn as sns
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 
