@@ -1,1 +1,1 @@
-Manual calculation of CoVariance Matrix, Eigenvectors for Principal Component Analysis in a Single PCA class for Iris DataSet
+Manual calculation of CoVariance Matrix, Eigenvectors for Principal Component Analysis in a Single PCA class for Financial Data, calculation of portfolio alpha factors 
