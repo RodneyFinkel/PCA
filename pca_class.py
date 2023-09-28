@@ -37,7 +37,6 @@ class PCA:
     def get_eigenvectors(self, C):
         # calculate eigenvalues & eigenvectors of covariance matrix 'C'
         eigenvalues, eigenvectors = np.linalg.eig(C)
-
         # sort eigenvalues descending and select columns based on n_components
         n_cols = np.argsort(eigenvalues)[::-1][:self.n_components]
         selected_vectors = eigenvectors[:, n_cols]
