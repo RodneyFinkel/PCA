@@ -23,10 +23,9 @@ class PCA:
         return projected_matrix
 
     def standardize_data(self, X):
-        numerator = X - np.mean(X, axis=0)
-        denominator = np.std(X, axis=0)
-        print(numerator/denominator)
-        return numerator / denominator
+        numerator = X - np.mean(X, axis=0) # mean centering
+        denominator = np.std(X, axis=0) # standardization (dividing by standard deviation)
+        return numerator / denominator # saved as self.A
     
     def get_covariance_matrix(self, ddof=0):
         # calculate covariance matrix with standardized matrix A
@@ -47,9 +46,6 @@ class PCA:
 
     def project_matrix(self, eigenvectors):
         P = np.dot(self.A, eigenvectors)
-        print(self.A)
-        print(P)
-        print(P.shape)
         return P
 
 # Testing
