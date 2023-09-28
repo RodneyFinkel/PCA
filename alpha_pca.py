@@ -16,7 +16,7 @@ bank_data = yf.download(bank_tickers, start='2015-01-01', end='2023-03-01')['Adj
 # Combine data into a single dataframe
 data = pd.concat([tech_data, finance_data, bank_data], axis=1)
 data.columns = ['AAPL', 'MSFT', 'AMZN', 'GOOG', 'JPM', 'BAC', 'GS', 'MS', 'MA', 'AXP']
-data
+print(data)
 
 # Calculate daily returns
 returns = data.pct_change().dropna()
@@ -51,3 +51,4 @@ sns.set(style='ticks', palette='viridis')
 g = sns.pairplot(alpha_factors)
 g.fig.set_size_inches(10,10)
 plt.show()
+
