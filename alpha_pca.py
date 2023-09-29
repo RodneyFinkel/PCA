@@ -9,14 +9,13 @@ tech_tickers = ['AAPL', 'MSFT', 'AMZN', 'GOOG']
 bank_tickers = ['JPM', 'BAC', 'GS', 'MS']
 finance_tickers = ['MA', 'AXP']
 
-tech_data = yf.download(tech_tickers, start='2015-01-01', end='2023-03-01')['Adj Close']
+tech_data = yf.download(tech_tickers, start='2015-01-01', end='2023-03-01', threads=True)['Adj Close']
 finance_data = yf.download(finance_tickers, start='2015-01-01', end='2023-03-01')['Adj Close']
 bank_data = yf.download(bank_tickers, start='2015-01-01', end='2023-03-01')['Adj Close']
 
 # Combine data into a single dataframe
 data = pd.concat([tech_data, finance_data, bank_data], axis=1)
 data.columns = ['AAPL', 'MSFT', 'AMZN', 'GOOG', 'JPM', 'BAC', 'GS', 'MS', 'MA', 'AXP']
-print(data)
 
 # Calculate daily returns
 returns = data.pct_change().dropna()
@@ -26,7 +25,11 @@ pca.fit(returns)
 
 # Plot principal components
 fig, ax = plt.subplots(figsize=(12, 6), dpi=100)
-for i, (x, y) in enumerate(zip(pca.components_[0], pca.components_[1])):
+# enumerate creates a tuple of index and pairwise ellements from the principal components that have been zipped into a preceeding tuple
+# i identifies the stock with it's new relative position in the new principal axi/principal components
+# the scatter plot is a pairwise plot of each stock's variance along a principal component ie x, y are the stock's coordinates in the PCA space
+# using pca.components_ consider investigating the explained variance associated with each principal component
+for i, (x, y) in enumerate(zip(pca.components_[0], pca.components_[1])): 
     ax.scatter(x, y, marker='o', s=100)
     ax.annotate(returns.columns[i], xy=(x, y), xytext=(x+0.04, y+0.06),
                 arrowprops=dict(facecolor='black', shrink=0.05, width=2, headwidth=6, headlength=8, connectionstyle='arc3,rad=0.1'))
