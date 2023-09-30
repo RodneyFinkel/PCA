@@ -87,6 +87,7 @@ plt.show()
     
 # Calculate pairwise correlation between all collumns of alpha_returns dataframe. 
 # corr() uses Pearson's Correlation Coefficient which is the Covariance between two variables divided by eeach of their standard deviations
+# COULD USE STANDARDIZED AND MEAN CENTRED DATA FOR NORMAL COVARTIANCE INSTEAD OF PCC(p) to yield similar results
 corr_matrix = alpha_returns.corr()
 alpha_corr = corr_matrix.iloc[:n_components, n_components:]
     
@@ -99,4 +100,5 @@ plt.show()
 # Calculate alpha factors Sharpe Ratios
 sharpe_ratio = alpha.mean() / alpha.std() *np.sqrt(252)
 print(f'Sharpe ratio: \n{sharpe_ratio}')
-                                                        
+  
+                                                      
