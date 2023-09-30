@@ -46,7 +46,7 @@ plt.show()
 alpha_factors = pd.DataFrame()
 for i in range(3):
     alpha_factors[f'alpha_{i+1}'] = returns.dot(pca.components_[i])
-
+print('alpha_factors:', alpha_factors)
 # Add alpha factors to returns data
 alpha_returns = pd.concat([alpha_factors, returns], axis=1)
 print(alpha_returns)
@@ -73,4 +73,24 @@ print(f'Mean alpha: \n{alpha_mean}')
 print('='*50)
 print(f'Std alpha: \n{alpha_std}')
 
-                                                                   
+# Cumulative Returns
+alpha_cum_returns = (1 + alpha_factors).cumprod() - 1
+
+# Plot returns
+fig, ax = plt.subplots(figsize=(12, 6), dpi=100)
+ax.plot(alpha_cum_returns)  # alpha_factors has a date column which is used as 0-axis/independent variable
+ax.legend(alpha_cum_returns.columns)
+ax.set_xlabel('Date')
+ax.set_ylabel('Cumulative Returns')
+ax.set_title('Cumulative Returns of Alpha Factors')
+plt.show()
+    
+# Calculate Correlation
+corr_matrix = alpha_returns.corr()
+alpha_corr = corr_matrix.iloc[:n_components, n_components:]
+    
+# Plot Heatmap     
+fig, ax = plt.subplots(figsize=(12, 6), dpi=100)
+sns.heatmap(alpha_corr, cmap='coolwarm', annot=True, fmt='.2f', ax=ax)
+plt.title('Correlation Matrix between Alpha Factors and Stock Returns')
+plt.show()                                                         
