@@ -3,7 +3,7 @@ import pandas as pd
 import seaborn as sns
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
-import statsmodel.api as sm
+import statsmodels.api as sm
 
 # Download Data
 tech_tickers = ['AAPL', 'MSFT', 'AMZN', 'GOOG']
@@ -49,6 +49,7 @@ for i in range(3):
 
 # Add alpha factors to returns data
 alpha_returns = pd.concat([alpha_factors, returns], axis=1)
+print(alpha_returns)
 
 # Plot scatter matrix of alpha factors: which represents the pairwise relationship between each alpha factor 
 # and also a univariate plot along the diagonal of the scatteroplot matrix
@@ -60,13 +61,16 @@ plt.show()
 # calculate alpha of each stock by regressing (OLSr) it's returns against each alpha factor
 # alpha factors are the projection of returns against the principal components/eigenvectors of the covariance matrix
 alpha = pd.DataFrame()
-for i in range(n_components):
+for i in range(10):
     model = sm.OLS(alpha_returns.iloc[:, 3+i], alpha_returns.iloc[:, :3])
     results = model.fit()
-    alpha[f'alpha_{i+1}'] = results.params
-alpha_mean = alpha.mean()
-alpha_std = alpha.std()
+    alpha[f'alpha_{i+1}'] = results.params # storing the estimated co-efficients in alpha dataframe 
+alpha.columns = ['AAPL', 'MSFT', 'AMZN', 'GOOG', 'JPM', 'BAC', 'GS', 'MS', 'MA', 'AXP']
+print(alpha)                
+alpha_mean = alpha.mean(axis=1) # mean of alpha co-efficients across all stocks
+alpha_std = alpha.std(axis=1) # higher std of each alpha across stocks indicates greater variablity in alpha's impact, lower implies more consistent behaviour of alpha across the stocks
 print(f'Mean alpha: \n{alpha_mean}')
 print('='*50)
 print(f'Std alpha: \n{alpha_std}')
 
+                                                                   
