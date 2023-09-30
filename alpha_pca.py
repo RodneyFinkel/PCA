@@ -85,7 +85,8 @@ ax.set_ylabel('Cumulative Returns')
 ax.set_title('Cumulative Returns of Alpha Factors')
 plt.show()
     
-# Calculate Correlation
+# Calculate pairwise correlation between all collumns of alpha_returns dataframe. 
+# corr() uses Pearson's Correlation Coefficient which is the Covariance between two variables divided by eeach of their standard deviations
 corr_matrix = alpha_returns.corr()
 alpha_corr = corr_matrix.iloc[:n_components, n_components:]
     
@@ -93,4 +94,9 @@ alpha_corr = corr_matrix.iloc[:n_components, n_components:]
 fig, ax = plt.subplots(figsize=(12, 6), dpi=100)
 sns.heatmap(alpha_corr, cmap='coolwarm', annot=True, fmt='.2f', ax=ax)
 plt.title('Correlation Matrix between Alpha Factors and Stock Returns')
-plt.show()                                                         
+plt.show() 
+
+# Calculate alpha factors Sharpe Ratios
+sharpe_ratio = alpha.mean() / alpha.std() *np.sqrt(252)
+print(f'Sharpe ratio: \n{sharpe_ratio}')
+                                                        
