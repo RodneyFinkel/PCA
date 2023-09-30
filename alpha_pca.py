@@ -1,5 +1,6 @@
 import yfinance as yf
 import pandas as pd
+import numpy as np
 import seaborn as sns
 from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
@@ -89,7 +90,7 @@ plt.show()
 # corr() uses Pearson's Correlation Coefficient which is the Covariance between two variables divided by eeach of their standard deviations
 # COULD USE STANDARDIZED AND MEAN CENTRED DATA FOR NORMAL COVARTIANCE INSTEAD OF PCC(p) to yield similar results
 corr_matrix = alpha_returns.corr()
-alpha_corr = corr_matrix.iloc[:n_components, n_components:]
+alpha_corr = corr_matrix.iloc[:3, 3:13] # selecting first 3 rows of corr_matrix and then last 10 coullumns
     
 # Plot Heatmap     
 fig, ax = plt.subplots(figsize=(12, 6), dpi=100)
