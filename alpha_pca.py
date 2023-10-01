@@ -98,8 +98,11 @@ sns.heatmap(alpha_corr, cmap='coolwarm', annot=True, fmt='.2f', ax=ax)
 plt.title('Correlation Matrix between Alpha Factors and Stock Returns')
 plt.show() 
 
-# Calculate alpha factors Sharpe Ratios
-sharpe_ratio = alpha.mean() / alpha.std() *np.sqrt(252)
+# Calculate alpha factor's Sharpe Ratios 
+risk_free_rate = 0.2
+sharpe_ratio = alpha.mean()/(alpha.std() *np.sqrt(252))
 print(f'Sharpe ratio: \n{sharpe_ratio}')
   
-                                                      
+# Sharpe Ratios of daily returns
+sharpe_ratio2 = (returns.mean()-risk_free_rate)/returns.std()
+print(f'Sharpe_ratio2: \n{sharpe_ratio2}')                                                      
